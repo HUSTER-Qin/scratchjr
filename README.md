@@ -1,4 +1,4 @@
-## Overview
+## Overview 
 This is the official git repository hosting the source code for the
 [ScratchJr](http://scratchjr.org/) project.
 
