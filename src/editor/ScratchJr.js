@@ -179,24 +179,28 @@ export default class ScratchJr {
     static appinit (v) {
         stagecolor = window.Settings.stageColor;
         defaultSprite = window.Settings.defaultSprite;
-        version = v;
+        version = v; // iOSv01
         document.body.scrollTop = 0;
         time = (new Date()) - 0;
         var urlvars = getUrlVars();
         iOS.hascamera();
         ScratchJr.log('starting the app');
-        BlockSpecs.initBlocks();
+        BlockSpecs.initBlocks(); //  初始化流程控制的图标
         Project.loadIcon = document.createElement('img');
         Project.loadIcon.src = 'assets/loading.png';
         ScratchJr.log('blocks init', ScratchJr.getTime(), 'sec', BlockSpecs.loadCount);
         currentProject = urlvars.pmd5;
         editmode = urlvars.mode;
-        libInit();
+        libInit(); // 获取你frame 节点
+        // 一些遮罩层的处理
         Project.init();
         ScratchJr.log('Start ui init', ScratchJr.getTime(), 'sec');
+        // 项目加载进度条
         Project.setProgress(10);
         ScratchAudio.init();
+        // 初始化 新增角色的页面 功能
         Library.init();
+        // 绘制角色的 初始化
         Paint.init();
         Record.init();
         Prims.init();
@@ -453,7 +457,7 @@ export default class ScratchJr {
         ScratchJr.resetSprites();
         ScratchJr.startCurrentPageStrips(['onflag', 'ontouch']);
     }
-
+    // 开始
     static startCurrentPageStrips (list) {
         var page = stage.currentPage.div;
         for (var i = 0; i < page.childElementCount; i++) {

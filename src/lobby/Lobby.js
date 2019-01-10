@@ -44,22 +44,25 @@ export default class Lobby {
         if (window.Settings.settingsPageDisabled) {
             gn('settings').style.visibility = 'hidden';
         }
-
+        // 我的项目
         gn('hometab').ontouchstart = function () {
             if (gn('hometab').className != 'home on') {
                 Lobby.setPage('home');
             }
         };
+        // 帮助
         gn('helptab').ontouchstart = function () {
             if (gn('helptab').className != 'help on') {
                 Lobby.setPage('help');
             }
         };
+        // 教程
         gn('booktab').ontouchstart = function () {
             if (gn('booktab').className != 'book on') {
                 Lobby.setPage('book');
             }
         };
+        //设置
         gn('geartab').ontouchstart = function () {
             if (gn('geartab').className != 'gear on') {
                 Lobby.setPage('gear');
@@ -89,7 +92,7 @@ export default class Lobby {
             AndroidInterface.notifyDoneLoading();
         }
     }
-
+    // 获取设备资源
     static setPage (page) {
         if (busy) {
             return;
@@ -136,7 +139,7 @@ export default class Lobby {
         }
         currentPage = page;
     }
-
+    // 导入项目
     static loadProjects (p) {
         document.ontouchmove = undefined;
         gn('topsection').className = 'topsection home';

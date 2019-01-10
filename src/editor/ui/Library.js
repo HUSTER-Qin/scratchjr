@@ -17,11 +17,15 @@ let shaking;
 let type;
 let timeoutEvent;
 let libFrame;
-
+/**
+ * 初始化角色操作页面
+ */
 export default class Library {
     static init () {
+        // libframe 左侧新增 [角色] 的操作界面
         libFrame = document.getElementById('libframe');
         libFrame.style.minHeight = Math.max(getDocumentHeight(), frame.offsetHeight) + 'px';
+        // 顶部操作栏
         var topbar = newHTML('div', 'topbar', libFrame);
         topbar.setAttribute('id', 'topbar');
         var actions = newHTML('div', 'actions', topbar);
@@ -35,6 +39,7 @@ export default class Library {
     }
 
     static createScrollPanel () {
+        // 操作内容区域
         var inner = newHTML('div', 'innerlibrary', libFrame);
         inner.setAttribute('id', 'asssetsview');
         var div = newHTML('div', 'scrollarea', inner);
@@ -50,8 +55,11 @@ export default class Library {
         libFrame.focus();
         selectedOne = undefined;
         gn('okbut').ontouchstart = (type == 'costumes') ? Library.closeSpriteSelection : Library.closeBkgSelection;
+        // 清空列表
         Library.clean();
+        // 创建列表dom
         Library.createScrollPanel();
+        // 加载已保存的 角色
         Library.addThumbnails(type);
         window.ontouchstart = undefined;
         window.ontouchend = undefined;
@@ -81,17 +89,19 @@ export default class Library {
         e.stopPropagation();
         ScratchAudio.sndFX('tap.wav');
         ScratchJr.blur();
+        // 隐藏新增角色的操作
         libFrame.className = 'libframe disappear';
         document.body.scrollTop = 0;
         frame.style.display = 'block';
         ScratchJr.editorEvents();
         ScratchJr.onBackButtonCallback.pop();
     }
-
+    // 设置头 绑定事件
     static layoutHeader () {
         var buttons = newHTML('div', 'bkgbuttons', gn('libactions'));
         var paintme = newHTML('div', 'painticon', buttons);
         paintme.id = 'library_paintme';
+        // 头部 点击事件
         paintme.ontouchstart = Library.editResource;
         var okbut = newHTML('div', 'okicon', buttons);
         okbut.setAttribute('id', 'okbut');
@@ -495,12 +505,12 @@ export default class Library {
             Library.editCostume(e);
         }
     }
-
+    // 编辑已有的角色
     static editBackground () {
         var md5 = selectedOne && (selectedOne != 'none') ? selectedOne : undefined;
         Paint.open(true, md5);
     }
-
+    // 编辑新的角色
     static editCostume () {
         var sname = undefined;
         var cname = selectedOne ? clickThumb.fieldname : Localization.localize('LIBRARY_CHARACTER');

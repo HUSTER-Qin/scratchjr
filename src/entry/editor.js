@@ -2,7 +2,7 @@ import ScratchJr from '../editor/ScratchJr';
 import iOS from '../iPad/iOS';
 import Camera from '../painteditor/Camera';
 import Record from '../editor/ui/Record';
-
+// pmd5=3&mode=edit
 export function editorMain () {
     iOS.getsettings(doNext);
     function doNext (str) {

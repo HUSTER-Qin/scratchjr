@@ -405,7 +405,9 @@ export default class Sprite {
             this.ycoor = this.ycoor - 360;
         }
     }
-
+    /**
+     * 渲染移动元素计算动画位置
+     */
     render () {
         // TODO: Merge these to get better thumbnail rendering on iOS
         var dx, dy, mtx;
@@ -489,7 +491,7 @@ export default class Sprite {
         this.div.appendChild(this.img);
         this.borderOn = false;
     }
-
+    //TODO:实施移动
     setTransform (transform) {
         this.div.style.webkitTransform = transform;
     }

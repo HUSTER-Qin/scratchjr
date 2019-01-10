@@ -145,6 +145,7 @@ export default class Paint {
         paintFrame.style.width = w + 'px';
         paintFrame.style.height = h + 'px';
         BlockSpecs.loadCount++;
+        // 选择的色块
         IO.requestFromServer('assets/paint/splash.svg', Paint.setSplash);
         BlockSpecs.loadCount++;
         IO.requestFromServer('assets/paint/splashshade.svg', Paint.setSplashShade);

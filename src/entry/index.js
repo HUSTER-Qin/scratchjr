@@ -4,12 +4,15 @@ import iOS from '../iPad/iOS';
 import UI from '../editor/ui/UI';
 import Localization from '../utils/Localization';
 import AppUsage from '../utils/AppUsage';
-
+// 主入口
 export function indexMain () {
     gn('gettings').ontouchend = indexGettingstarted;
     gn('startcode').ontouchend = indexGohome;
+    // 获取音频相关的
     ScratchAudio.init();
+    // 获取url
     var urlvars = getUrlVars();
+       //home返回
     if (urlvars.back) {
         indexLoadOptions();
     } else {
@@ -62,7 +65,7 @@ function indexFirstTime () {
         indexLoadOptions();
     }, 2000);
 }
-
+// 导入配置
 function indexLoadOptions () {
     if (window.Settings.edition != 'PBS' && AppUsage.askForUsage()) {
         indexLoadUsage();
@@ -171,6 +174,7 @@ function indexSetUsage (e) {
     }
     // Send one-time analytics event about usage
     iOS.analyticsEvent('lobby', 'scratchjr_usage', usageText);
+    // 设置Cookie
     AppUsage.setUsage(usageText);
     ScratchAudio.sndFX('tap.wav');
     indexLoadStart(true);

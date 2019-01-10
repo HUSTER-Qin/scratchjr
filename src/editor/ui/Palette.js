@@ -45,9 +45,11 @@ export default class Palette {
         blockdy *= scaleMultiplier;
         Palette.blockdx *= scaleMultiplier; // XXX
         betweenblocks = 90 * blockscale;
+        // 创建类别 按钮
         Palette.createCategorySelectors(parent);
         var div = newHTML('div', 'palette', parent);
         div.setAttribute('id', 'palette');
+        // 类别 具体的功能按钮事件
         div.ontouchstart = function (evt) {
             Palette.paletteMouseDown(evt);
         };
@@ -66,7 +68,7 @@ export default class Palette {
             Palette.createSelector(sel, i, leftPx + i * widthPx, 0, BlockSpecs.categories[i]);
         }
     }
-
+    // 拖动功能块
     static paletteMouseDown (e) {
         if (isTablet && e.touches && (e.touches.length > 1)) {
             return;
@@ -292,7 +294,14 @@ export default class Palette {
         }
         return null;
     }
-
+    /**
+     * TODO:创建类别选项按钮、绑定事件
+     * @param {*} parent
+     * @param {*} n
+     * @param {*} dx
+     * @param {*} dy
+     * @param {*} spec
+     */
     static createSelector (parent, n, dx, dy, spec) {
         var pxWidth = 51 * scaleMultiplier;
         var pxHeight = 57 * scaleMultiplier;
@@ -319,6 +328,7 @@ export default class Palette {
             zIndex: 8,
             visibility: 'hidden'
         });
+        //TODO:击类别的事件
         div.ontouchstart = function (evt) {
             Palette.clickOnCategory(evt);
         };
@@ -353,6 +363,7 @@ export default class Palette {
             sel.childNodes[1].style.visibility = (sel.index == n) ? 'visible' : 'hidden';
         }
         var pal = gn('palette');
+        // 设置工具条的 颜色
         gn('blockspalette').style.background = currentSel.bkg;
         while (pal.childElementCount > 0) {
             pal.removeChild(pal.childNodes[0]);
@@ -566,7 +577,7 @@ export default class Palette {
     //////////////////////////////////////
     //  Palette Block
     /////////////////////////////////////
-
+    //TODO:渲染类别下的按钮
     static newScaledBlock (parent, op, scale, dx, dy) {
         var bbx = new Block(BlockSpecs.defs[op], true, scale);
         setProps(bbx.div.style, {

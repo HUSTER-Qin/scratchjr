@@ -51,9 +51,13 @@ export default class BlockSpecs {
 
     static initBlocks () {
         loadassets = new Object();
+        // 加载资源图片
         BlockSpecs.loadGraphics();
+        // 返回图标组
         BlockSpecs.defs = BlockSpecs.setupBlocksSpecs();
+        // 模块 位置 对象
         BlockSpecs.palettes = BlockSpecs.setupPalettesDef();
+        // 初始化 主按钮的状态和颜色
         BlockSpecs.categories = BlockSpecs.setupCategories();
         if (window.Settings.edition == 'PBS') {
             BlockSpecs.canvasMask = BlockSpecs.getImageFrom('assets/ui/canvasmask', 'svg');
@@ -72,7 +76,9 @@ export default class BlockSpecs {
         BlockSpecs.balloon = str;
     }
 
-
+    /**
+     * 加载图标
+     */
     static loadGraphics () {
         BlockSpecs.mic = BlockSpecs.getImageFrom('assets/ui/recordslot', 'svg');
         BlockSpecs.yellowStart = BlockSpecs.getImageFrom('assets/blocks/start', 'svg');
@@ -114,7 +120,11 @@ export default class BlockSpecs {
         BlockSpecs.repeatS = BlockSpecs.getImageFrom('assets/blocks/shadowRepeat');
 
     }
-
+    /**
+     * 加载图片
+     * @param {} url 
+     * @param {*} ext 
+     */
     static getImageFrom (url, ext) {
         var img = document.createElement('img');
         img.src = url + (ext ? '.' + ext : '.png');
@@ -137,7 +147,9 @@ export default class BlockSpecs {
             }
         }
     }
-
+    /**
+     * 工具栏的六个按钮
+     */
     static setupCategories () {
         return new Array(
             [

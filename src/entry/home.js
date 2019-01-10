@@ -10,6 +10,7 @@ export function homeMain () {
     function doNext (str) {
         var list = str.split(',');
         iOS.path = list[1] == '0' ? list[0] + '/' : undefined;
+       // 初始化home页内容
         Lobby.appinit(window.Settings.scratchJrVersion);
     }
 }

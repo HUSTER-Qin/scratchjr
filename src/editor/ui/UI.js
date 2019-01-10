@@ -453,6 +453,7 @@ export default class UI {
         var p = newHTML('div', 'spritethumbs', sprites);
         var div = newHTML('div', 'spritecc', p);
         div.setAttribute('id', 'spritecc');
+        // 点击编辑角色
         div.ontouchstart = UI.spriteThumbsActions;
 
         // scrollbar
@@ -683,6 +684,7 @@ export default class UI {
 
     static putInPaintEditor (e) {
         ScratchJr.unfocus(e);
+        // 获取当前的 角色
         var s = ScratchJr.getSprite();
         if (!s) {
             return;

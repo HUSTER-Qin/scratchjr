@@ -118,7 +118,7 @@ export default class Home {
         }
         Home.performAction(e);
     }
-
+    // 事件结束、调用
     static performAction (e) {
         e.preventDefault();
         e.stopPropagation();
@@ -203,7 +203,7 @@ export default class Home {
         }
         Home.actionTarget = undefined;
     }
-
+    // 获取点击的点 返回键
     static getAction (e) {
         if (!Home.actionTarget) {
             return 'none';

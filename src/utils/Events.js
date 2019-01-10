@@ -104,6 +104,7 @@ export default class Events {
         var frameDiv = gn('frame');
         frameDiv.appendChild(dragDiv);
     }
+    // 绑定各模块的事件
     static startDrag (e, c, atstart, atend, atdrag, atclick, athold) {
         dragged = false;
         var pt = Events.getTargetPoint(e);

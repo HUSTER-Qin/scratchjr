@@ -56,15 +56,17 @@ export default class Project {
         ScratchJr.stage.clear();
         UI.clear();
     }
-
+    // 根据ID 加载项目
     static load () {
         mediaCountBase = 1;
         ScratchJr.log('Project load status', ScratchJr.getTime(), 'sec', BlockSpecs.loadCount);
         if (BlockSpecs.loadCount > 0) {
+            // 加载资源
             setTimeout(function () {
                 Project.delayLoad();
             }, 32);
         } else {
+            // 资源加载完成
             Project.startLoad();
         }
     }
@@ -78,23 +80,26 @@ export default class Project {
             }, 32);
         }
     }
-
+    // 开始项目
     static startLoad () {
         ScratchJr.log('all UI assets recieved - procced to call server', ScratchJr.getTime(), 'sec');
         Project.setProgress(20);
         UI.layout();
         IO.getObject(ScratchJr.currentProject, Project.dataRecieved);
     }
-
+    // 读取项目数据库 后的回调
     static dataRecieved (str) {
         ScratchJr.log('got project metadata', ScratchJr.getTime(), 'sec');
         var data = JSON.parse(str)[0];
+        // 对象序列化 将key装换大写
         metadata = IO.parseProjectData(data);
         mediaCount = -1;
         if (metadata.json) {
+            // 加载已有
             Project.loadData(metadata.json, doneProjectLoad);
         } else {
             mediaCount = 0;
+            // 新增
             new Page(getIdFor('page'));
             Palette.selectCategory(1);
             // On Android 4.2, this comes up blank the first time, so try again in 100ms.
@@ -128,9 +133,12 @@ export default class Project {
         }
     }
 
-
+    /**
+     * 加载项目
+     */
     static init () {
         ScratchJr.log('Project init', ScratchJr.getTime(), 'sec');
+        // loading 图
         var bd = newHTML('div', 'modal-backdrop fade', frame.parentNode);
         bd.setAttribute('id', 'backdrop');
         setProps(gn('backdrop').style, {
@@ -155,7 +163,7 @@ export default class Project {
         }
         Project.drawBlind();
     }
-
+    // loading
     static addFeedback () {
         var body = gn('modalbody');
         newHTML('div', 'loadscreenfill', body);
@@ -169,7 +177,10 @@ export default class Project {
         var li = newHTML('div', 'loadicon', body);
         li.appendChild(loadIcon);
     }
-
+    /**
+     * 设置进度条
+     * @param {} perc
+     */
     static setProgress (perc) {
         if (!gn('progressbar')) {
             return;
@@ -183,7 +194,9 @@ export default class Project {
         }
 
     }
-
+    /**
+     * 遮罩层
+     */
     static drawBlind () {
         gn('backdrop').setAttribute('class', 'modal-backdrop fade in');
         setProps(gn('backdrop').style, {
